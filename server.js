@@ -2,7 +2,7 @@ const express = require('express');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
@@ -13,13 +13,16 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
+// Just like how we connected to MYSQL using the MYSQL library or the SEQUELIZE library, we need to connect to the mongodb library using mongoose
 mongoose.connect("mongodb://localhost/workout", {
   useNewUrlParser: true,
   useFindAndModify: false
 });
 
-app.use(require('./routes/htmlRoutes'))
+// routes
+app.use(require('./routes/htmlRoutes'));
+app.use(require('./routes/apiRoutes'));
 
 app.listen(PORT, () => {
-    console.log(`This app is brought to you by PORT ${PORT}`);
+    console.log(`This app brought to you by PORT ${PORT}`);
 })
