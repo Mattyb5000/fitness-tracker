@@ -15,7 +15,7 @@ app.use(express.static("public"));
 
 // Just like how we connected to MYSQL using the MYSQL library or the SEQUELIZE library, we need to connect to the mongodb library using mongoose
 mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/Workout',
+  process.env.MONGODB_URI || 'mongodb://localhost/workouts',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
