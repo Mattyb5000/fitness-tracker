@@ -14,10 +14,15 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Just like how we connected to MYSQL using the MYSQL library or the SEQUELIZE library, we need to connect to the mongodb library using mongoose
-mongoose.connect("mongodb://localhost/workout", {
-  useNewUrlParser: true,
-  useFindAndModify: false
-});
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/workout',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  }
+);
 
 // routes
 app.use(require('./routes/htmlRoutes'));
